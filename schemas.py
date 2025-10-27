@@ -5,6 +5,11 @@
 
 from pydantic import BaseModel
 
+class UserCreate(BaseModel):
+    name: str
+    age: int
+    married: bool
+
 
 class User(BaseModel):  
     id: int

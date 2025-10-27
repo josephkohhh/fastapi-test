@@ -30,13 +30,14 @@ def read_user_by_id(id: int, db: Session = Depends(database.get_db)):
 
 
 @app.post('/user')
-def add_user(user: schemas.User, db: Session = Depends(database.get_db)):
+def add_user(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
     return crud.create_user(user, db) 
 
 
 @app.put('/user')
-def modify_user(id: int, user: schemas.User, db: Session = Depends(database.get_db)):
+def modify_user(id: int, user: schemas.UserCreate, db: Session = Depends(database.get_db)):
     return crud.update_user(id, user, db)
+
 
 @app.delete('/user')
 def remove_user(id: int, db: Session = Depends(database.get_db)):
