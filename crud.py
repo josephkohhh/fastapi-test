@@ -16,13 +16,15 @@ def get_user_by_id(id: int, db: Session):
     return 'user not found'
 
 
-def create_user(user: schemas.User, db: Session):
-    db.add(models.User(**user.model_dump()))
+def create_user(user: schemas.UserCreate, db: Session):
+    db_user = models.User(**user.model_dump())
+    db.add(db_user)
     db.commit()
-    return user
+    db.refresh(db_user)
+    return db_user
 
 
-def update_user(id: int, user: schemas.User, db: Session):
+def update_user(id: int, user: schemas.UserCreate, db: Session):
     db_user = db.query(models.User).filter(models.User.id == id).first()
     if db_user:
         db_user.name = user.name
