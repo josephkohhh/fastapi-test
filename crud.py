@@ -1,18 +1,43 @@
 # crud.py - CRUD functions (interacting with models.py)
 
-from . import schemas
+from sqlalchemy.orm import Session
+import models
+import schemas 
 
-def get_user():
-    pass
 
-def get_all_user():
-    pass
+def get_all_user(db: Session):
+    return db.query(models.User).all()
 
-def create_user():
-    pass
 
-def search_user():
-    pass
+def get_user_by_id(id: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == id).first()
+    if db_user:
+        return db_user
+    return 'user not found'
 
-def delete_user():
-    pass
+
+def create_user(user: schemas.User, db: Session):
+    db.add(models.User(**user.model_dump()))
+    db.commit()
+    return user
+
+
+def update_user(id: int, user: schemas.User, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == id).first()
+    if db_user:
+        db_user.name = user.name
+        db_user.age = user.age
+        db_user.married = user.married
+        db.commit()
+    else:
+        return 'no user found'
+
+
+def delete_user(id: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == id).first()
+    if db_user:
+        db.delete(db_user)
+        db.commit()
+    else:
+        return 'no product found'
+    
