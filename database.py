@@ -1,9 +1,9 @@
 # database.py - db connection setup (SQLAlchemy engine & session)
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv # pip install python-dotenv
 import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 load_dotenv()  # Load .env file
 db_url = os.getenv("DATABASE_URL")

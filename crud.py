@@ -2,7 +2,7 @@
 
 from sqlalchemy.orm import Session
 import models
-import schemas 
+import schemas
 
 
 def get_all_user(db: Session):

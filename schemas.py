@@ -1,6 +1,5 @@
 # schemas.py - Pydantic models for validation
 
-
 # Pydantic BaseModel will take care of the constructor
 
 from pydantic import BaseModel
@@ -16,3 +15,8 @@ class User(BaseModel):
     name: str
     age: int
     married: bool
+
+
+# Tells Pydantic to read ORM/SQLAlchemy objects
+class Config:
+    orm_mode = True
