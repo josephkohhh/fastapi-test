@@ -1,5 +1,6 @@
 # main.py - FastAPI app and routes
 
+# python3 -m venv myenv
 # myenv\Scripts\Activate.ps1 source myenv/bin/activate
 # uvicorn main:app --reload
 
